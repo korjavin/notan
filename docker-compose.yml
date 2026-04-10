@@ -11,6 +11,7 @@ services:
       - "traefik.docker.network=${TRAEFIK_NETWORK_NAME:-traefik_default}"
       - "traefik.http.routers.notan.rule=Host(`${HOSTNAME}`)"
       - "traefik.http.routers.notan.entrypoints=websecure"
+      - "traefik.http.routers.notan.middlewares=auth-errors@docker,forward-auth@docker"
       - "traefik.http.routers.notan.tls.certresolver=myresolver"
       - "traefik.http.services.notan.loadbalancer.server.port=3000"
     restart: unless-stopped
