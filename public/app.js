@@ -1,10 +1,17 @@
 async function fetchSignedUrl() {
   const response = await fetch("/api/signed-url");
   if (!response.ok) {
-    const data = await response.json();
-    throw new Error(data.error || "Failed to get signed URL");
+    let message = "Failed to get signed URL";
+    try {
+      const data = await response.json();
+      message = data.error || message;
+    } catch {}
+    throw new Error(message);
   }
   const data = await response.json();
+  if (!data.signed_url) {
+    throw new Error("Response missing signed_url");
+  }
   return data.signed_url;
 }
 

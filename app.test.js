@@ -76,6 +76,16 @@ describe("fetchSignedUrl", () => {
     dom.cleanup();
   });
 
+  it("throws when response is ok but signed_url is missing", async () => {
+    global.fetch = async () => ({
+      ok: true,
+      json: async () => ({}),
+    });
+
+    await assert.rejects(() => fetchSignedUrl(), { message: "Response missing signed_url" });
+    dom.cleanup();
+  });
+
   it("throws with default message when no error field", async () => {
     global.fetch = async () => ({
       ok: false,

@@ -92,7 +92,7 @@ describe("server with API key", () => {
     assert.equal(res.body.signed_url, "wss://example.com/signed");
   });
 
-  it("GET /api/signed-url forwards upstream errors", async () => {
+  it("GET /api/signed-url returns 502 on upstream errors", async () => {
     global.fetch = async () => ({
       ok: false,
       status: 401,
@@ -100,8 +100,8 @@ describe("server with API key", () => {
     });
 
     const res = await request("/api/signed-url");
-    assert.equal(res.status, 401);
-    assert.match(res.body.error, /Unauthorized/);
+    assert.equal(res.status, 502);
+    assert.match(res.body.error, /API request failed/);
   });
 
   it("GET /api/signed-url returns 502 on network failure", async () => {
@@ -111,7 +111,7 @@ describe("server with API key", () => {
 
     const res = await request("/api/signed-url");
     assert.equal(res.status, 502);
-    assert.match(res.body.error, /Network error/);
+    assert.match(res.body.error, /Failed to reach ElevenLabs API/);
   });
 
   it("GET /api/conversation-token returns token on success", async () => {
@@ -130,7 +130,7 @@ describe("server with API key", () => {
     assert.equal(res.body.token, "abc123");
   });
 
-  it("GET /api/conversation-token forwards upstream errors", async () => {
+  it("GET /api/conversation-token returns 502 on upstream errors", async () => {
     global.fetch = async () => ({
       ok: false,
       status: 403,
@@ -138,8 +138,8 @@ describe("server with API key", () => {
     });
 
     const res = await request("/api/conversation-token");
-    assert.equal(res.status, 403);
-    assert.match(res.body.error, /Forbidden/);
+    assert.equal(res.status, 502);
+    assert.match(res.body.error, /API request failed/);
   });
 
   it("GET /api/conversation-token returns 502 on network failure", async () => {
@@ -149,6 +149,6 @@ describe("server with API key", () => {
 
     const res = await request("/api/conversation-token");
     assert.equal(res.status, 502);
-    assert.match(res.body.error, /Connection refused/);
+    assert.match(res.body.error, /Failed to reach ElevenLabs API/);
   });
 });

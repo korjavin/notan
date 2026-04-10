@@ -73,5 +73,5 @@ A minimal web application serving the ElevenLabs "Notan" conversational AI agent
 
 ### Task 5: Update documentation
 
-- [ ] Create README.md with setup instructions, env vars, and Docker usage
-- [ ] Move this plan to `docs/plans/completed/`
+- [x] Create README.md with setup instructions, env vars, and Docker usage
+- [x] Move this plan to `docs/plans/completed/`

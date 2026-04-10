@@ -16,8 +16,8 @@ app.get("/api/signed-url", async (req, res) => {
   }
 
   try {
-    const response = await fetch(
-      `https://api.elevenlabs.io/v1/convai/conversation/get_signed_url?agent_id=${ELEVENLABS_AGENT_ID}`,
+    const url = `https://api.elevenlabs.io/v1/convai/conversation/get_signed_url?agent_id=${encodeURIComponent(ELEVENLABS_AGENT_ID)}`;
+    const response = await fetch(url,
       {
         method: "GET",
         headers: { "xi-api-key": ELEVENLABS_API_KEY },
@@ -26,15 +26,18 @@ app.get("/api/signed-url", async (req, res) => {
 
     if (!response.ok) {
       const text = await response.text();
+      console.error(`ElevenLabs signed-url API error (${response.status}): ${text}`);
       return res
-        .status(response.status)
-        .json({ error: `ElevenLabs API error: ${text}` });
+        .status(502)
+        .json({ error: "ElevenLabs API request failed" });
     }
 
     const data = await response.json();
+    res.set("Cache-Control", "no-store");
     res.json(data);
   } catch (err) {
-    res.status(502).json({ error: `Failed to reach ElevenLabs API: ${err.message}` });
+    console.error("Failed to reach ElevenLabs API (signed-url):", err.message);
+    res.status(502).json({ error: "Failed to reach ElevenLabs API" });
   }
 });
 
@@ -58,15 +61,18 @@ app.get("/api/conversation-token", async (req, res) => {
 
     if (!response.ok) {
       const text = await response.text();
+      console.error(`ElevenLabs token API error (${response.status}): ${text}`);
       return res
-        .status(response.status)
-        .json({ error: `ElevenLabs API error: ${text}` });
+        .status(502)
+        .json({ error: "ElevenLabs API request failed" });
     }
 
     const data = await response.json();
+    res.set("Cache-Control", "no-store");
     res.json(data);
   } catch (err) {
-    res.status(502).json({ error: `Failed to reach ElevenLabs API: ${err.message}` });
+    console.error("Failed to reach ElevenLabs API (token):", err.message);
+    res.status(502).json({ error: "Failed to reach ElevenLabs API" });
   }
 });
 
