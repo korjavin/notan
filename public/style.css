@@ -54,3 +54,9 @@ h1 {
   font-size: 0.85rem;
   margin-bottom: 1rem;
 }
+
+elevenlabs-convai {
+  display: block;
+  width: 100%;
+  min-height: 300px;
+}
