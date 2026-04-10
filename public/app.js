@@ -42,6 +42,12 @@ async function init() {
 
   try {
     const signedUrl = await fetchSignedUrl();
+
+    // Wait for the custom element to be defined (script is async)
+    if (!customElements.get("elevenlabs-convai")) {
+      await customElements.whenDefined("elevenlabs-convai");
+    }
+
     const widget = document.getElementById("widget");
     if (widget) {
       widget.setAttribute("signed-url", signedUrl);
