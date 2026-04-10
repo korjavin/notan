@@ -29,13 +29,13 @@ A minimal web application serving the ElevenLabs "Notan" conversational AI agent
 - Create: `package.json`
 - Create: `.env.example`
 
-- [ ] Initialize package.json with express dependency
-- [ ] Create Express server that serves static files from `public/`
-- [ ] Add `GET /api/signed-url` endpoint that fetches a signed URL from ElevenLabs API using the server-side API key
-- [ ] Add `GET /api/conversation-token` endpoint for WebRTC token generation
-- [ ] Add basic error handling for missing API key and failed upstream requests
-- [ ] Write tests for the API endpoints (mock the ElevenLabs API calls)
-- [ ] Run project test suite - must pass before task 2
+- [x] Initialize package.json with express dependency
+- [x] Create Express server that serves static files from `public/`
+- [x] Add `GET /api/signed-url` endpoint that fetches a signed URL from ElevenLabs API using the server-side API key
+- [x] Add `GET /api/conversation-token` endpoint for WebRTC token generation
+- [x] Add basic error handling for missing API key and failed upstream requests
+- [x] Write tests for the API endpoints (mock the ElevenLabs API calls)
+- [x] Run project test suite - must pass before task 2
 
 ### Task 2: Frontend - HTML/JS/CSS with convai widget
 
