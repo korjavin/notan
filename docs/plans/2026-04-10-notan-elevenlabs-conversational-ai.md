@@ -44,12 +44,12 @@ A minimal web application serving the ElevenLabs "Notan" conversational AI agent
 - Create: `public/style.css`
 - Create: `public/app.js`
 
-- [ ] Create index.html with the ElevenLabs convai widget script (CDN) and a clean minimal layout
-- [ ] Write app.js that fetches a signed URL from `/api/signed-url` and passes it to the widget element
-- [ ] Add basic CSS styling for a centered, clean conversation interface
-- [ ] Add connection status indicator and error display
-- [ ] Write tests for the frontend JS (signed URL fetch logic)
-- [ ] Run project test suite - must pass before task 3
+- [x] Create index.html with the ElevenLabs convai widget script (CDN) and a clean minimal layout
+- [x] Write app.js that fetches a signed URL from `/api/signed-url` and passes it to the widget element
+- [x] Add basic CSS styling for a centered, clean conversation interface
+- [x] Add connection status indicator and error display
+- [x] Write tests for the frontend JS (signed URL fetch logic)
+- [x] Run project test suite - must pass before task 3
 
 ### Task 3: Dockerize the application
 
