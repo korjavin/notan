@@ -1,5 +1,4 @@
 version: "3.8"
-
 services:
   notan:
     image: ghcr.io/korjavin/notan:latest
@@ -12,12 +11,13 @@ services:
       - "traefik.http.routers.notan.rule=Host(`${HOSTNAME}`)"
       - "traefik.http.routers.notan.entrypoints=websecure"
       - "traefik.http.routers.notan.middlewares=${TRAEFIK_MIDDLEWARES:-auth-errors@docker,forward-auth@docker}"
+      - "traefik.http.routers.notan.tls=true"
+      - "traefik.http.routers.notan.tls.certresolver=${TRAEFIK_CERTRESOLVER:-letsencrypt}"
       - "traefik.http.services.notan.loadbalancer.server.port=3000"
     restart: unless-stopped
     environment:
       - ELEVENLABS_API_KEY=${ELEVENLABS_API_KEY}
       - ELEVENLABS_AGENT_ID=${ELEVENLABS_AGENT_ID}
-
 networks:
   traefik_network:
     external: true
