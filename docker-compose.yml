@@ -1,7 +1,7 @@
 version: "3.8"
 services:
   notan:
-    image: ghcr.io/korjavin/notan:latest
+    image: ghcr.io/korjavin/notan:0bba78570db78d15323465c41f13b6a57cb02539
     container_name: notan
     networks:
       - traefik_network
